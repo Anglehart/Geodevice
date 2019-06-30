@@ -3,16 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.1.2",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
     "mocha": "^6.1.4"
-  }
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anglehart/Studing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anglehart/Studing/issues"
+  },
+  "homepage": "https://github.com/Anglehart/Studing#readme"
 }
