@@ -1,13 +1,6 @@
-const path = require('path')
-const express = require('express')
-const exphbs = require('express-handlebars')
-const app = express()
 const pg = require('pg')
 const conString = 'postgres://postgres:123456@localhost/node_hero'
 var pool = new pg.Pool({connectionString: conString})
-
-
-
 
   pool.connect(function (err, client, done) {
     if (err) {
@@ -20,6 +13,5 @@ var pool = new pg.Pool({connectionString: conString})
         // Передача ошибки в обработчик express
         return next(err)
       }
-      res.send(200)
     })
   })
