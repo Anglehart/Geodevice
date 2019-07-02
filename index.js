@@ -1,7 +1,8 @@
 const pg = require('pg')
-const conString = 'postgres://postgres:123456@ localhost/node_hero'
+const conString = 'postgres://postgres:123456@localhost:5432/node_hero'
+var pool = new pg.Pool({connectionString: conString})
 
-pg.connect(conString, function (err, client, done) {
+pool.connect(function (err, client, done) {
   if (err) {
     return console.error('error fetching client from pool', err)
   }
@@ -12,6 +13,6 @@ pg.connect(conString, function (err, client, done) {
       return console.error('error happened during query', err)
     }
     console.log(result.rows[0])
-    process.exit(0)
+    pool.end()
   })
 })
