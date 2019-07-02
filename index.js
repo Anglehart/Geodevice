@@ -1,18 +1,17 @@
-const path = require('path')
-const express = require('express')
-const exphbs = require('express-handlebars')
-const app = express()
+const pg = require('pg')
+const conString = 'postgres://postgres:123456@ localhost/node_hero'
 
-app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    extname: '.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts')
-}))
-app.set('view engine', '.hbs')
-app.set('views', path.join(__dirname, 'views'))
-app.listen(3000)
-app.get('/', (request, response) => {
-    response.render('home', {
-        name: 'УчителЪ!'
-    })
+pg.connect(conString, function (err, client, done) {
+  if (err) {
+    return console.error('error fetching client from pool', err)
+  }
+  client.query('SELECT $1::varchar AS my_first_query', ['node hero'], function (err, result) {
+    done()
+
+    if (err) {
+      return console.error('error happened during query', err)
+    }
+    console.log(result.rows[0])
+    process.exit(0)
+  })
 })
