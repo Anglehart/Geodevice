@@ -21,18 +21,20 @@ app.get('/', (request, response) => {
     })
 })
 
+
 app.post('/', function (req, res, next) {
   const user = req.body
-
+  //Что мы пытаемся присвоить константе user?
+  //По идее, в нее надо положить значения name и age, которые отрендерились на странице (или перехватить до этого)
+  //Если убрать обертку app.post и заявить переменные явно, то они запишутся в базу (я закоммитил это)
+  //В таком виде код просто подвешивает консоль
   pool.connect(function (err, client, done) {
     if (err) {
-      // Передача ошибки в обработчик express
       return next(err)
     }
     client.query('INSERT INTO users (name, age) VALUES ($1, $2);', [user.name, user.age], function (err, result) {
-      pool.end() // Этот коллбек сигнализирует драйверу pg, что соединение может быть закрыто или возвращено в пул соединений
+      pool.end()
       if (err) {
-        // Передача ошибки в обработчик express
         return next(err)
       }
     })
