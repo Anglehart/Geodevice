@@ -21,36 +21,17 @@ app.get('/userage', (request, response) => {
     response.render('home')
 })
 
-app.post("/userage", urlencodedParser, function (request, response) {
+app.post("/userage", urlencodedParser, function (request, response, next) {
     if(!request.body) return response.sendStatus(400);
     pool.connect(function (err, client, done) {
       if (err) {
         return next(err)
       }
       client.query('INSERT INTO users (name, age) VALUES ($1, $2);', [request.body.userName, request.body.userAge], function (err, result) {
-        pool.end()
         if (err) {
           return next(err)
         }
+      response.render('home')
       })
     })
-});
-
-/*app.post("/userage", urlencodedParser, function (request, response, next) {
-    if(!request.body) return response.sendStatus(400);
-    pool.connect(function (err, client, done) {
-      if (err) {
-        return next(err)
-      }
-      client.query('INSERT INTO users (name, age) VALUES ($1, $2);', [request.body.userName, request.body.userAge], function (err, result) {
-        pool.end()
-        if (err) {
-          return next(err)
-        }
-      })
-    })
-});*/
-
-app.get("/", function(request, response){
-    response.send("Главная страница");
 });
