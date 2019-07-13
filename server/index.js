@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const exphbs = require('express-handlebars')
+const hbs = require("hbs");
 const app = express()
 const pg = require('pg')
 const bodyParser = require("body-parser");
@@ -18,34 +19,40 @@ app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
 app.listen(3000)
 
-//Этот запрос должен получать из базы все данные и рендерить их. Но не работает =(
-app.get('/userage', (request, response, next) => {
+//app.get('/', express.static (path.join(__dirname, '../client')))
+
+app.get('/', (request, response, next) => {
   pool.connect(function (err, client, done) {
     if (err) {
       return next(err)
     }
-    client.query('SELECT name, age FROM users;', [], function (err, result) {
+    client.query('SELECT name, age FROM users;', function (err, result) {
       if (err) {
         return next(err)
       }
-      response.render('home', {object: result});
+
+      var databaseAll = result;
+      hbs.registerHelper("baseParse", function(databaseAll){
+        var users = JSON.parse(databaseAll);
+        return users
+      })
+      response.render('home')
     })
   })
 })
 
-//Этот запрос работает и отправляет данные в базу, а потом заново рендерит страницу
-app.post("/userage", urlencodedParser, function (request, response, next) {
+
+app.post("/", urlencodedParser, function (request, response, next) {
     if(!request.body) return response.sendStatus(400);
     pool.connect(function (err, client, done) {
       if (err) {
         return next(err)
       }
       client.query('INSERT INTO users (name, age) VALUES ($1, $2);', [request.body.userName, request.body.userAge], function (err, result) {
-        //pool.end() - если закрыть пул, то при повторном обращении выдает ошибку
         if (err) {
           return next(err)
         }
-      response.render('home') //После выполнения post-запроса браузер ожидает ответа, поэтому отправляем ему рендер страницы
       })
     })
+    response.render('home')
 });
