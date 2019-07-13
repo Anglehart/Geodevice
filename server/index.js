@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const hbs = require("hbs");
-const Handlebars = require("Handlebars");
 const app = express()
 const pg = require('pg')
 const bodyParser = require("body-parser");
@@ -21,24 +20,6 @@ app.set('views', path.join(__dirname, 'views'))
 app.listen(3000)
 
 app.get('/', express.static (path.join(__dirname, '../client')))
-
-/*app.get('/', (request, response, next) => {
-  pool.connect(function (err, client, done) {
-    if (err) {
-      return next(err)
-    }
-    client.query('SELECT name, age FROM users;', function (err, result) {
-      if (err) {
-        return next(err)
-      }
-      var baseParse = JSON.stringify(result);
-      response.render('home', {
-        baseParse: baseParse
-      })
-    })
-  })
-})*/
-
 
 app.post("/", urlencodedParser, function (request, response, next) {
     if(!request.body) return response.sendStatus(400);
