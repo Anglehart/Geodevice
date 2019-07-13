@@ -30,13 +30,12 @@ app.get('/', (request, response, next) => {
       if (err) {
         return next(err)
       }
-
-      var databaseAll = result;
-      hbs.registerHelper("baseParse", function(databaseAll){
-        var users = JSON.parse(databaseAll);
-        return users
+      var databaseAll = result; //присваиваю переменной результат выаолнения, т.е. json
+      hbs.registerHelper('baseParse', function(databaseAll){ //объясляю хэлпер, который принимает json
+        var users = JSON.parse(databaseAll); //паршу json
+        return users; //возвращаю результат
       })
-      response.render('home')
+      response.render('home') //ожидаю, что хэлпер отправит на рендер результат
     })
   })
 })
