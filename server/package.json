@@ -14,11 +14,12 @@
     "pg-promise": "^8.7.2"
   },
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1"
   },
   "scripts": {
     "test": "mocha",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

@@ -9,7 +9,6 @@ const conString = 'postgres://postgres:123456@localhost/node_hero'
 var pool = new pg.Pool({connectionString: conString})
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
@@ -36,10 +35,7 @@ app.post("/", urlencodedParser, function (request, response, next) {
         if (err) {
           return next(err)
         }
-        var baseParse = JSON.stringify(result);
-        response.render('home', {
-          baseParse: baseParse
-        })
+        response.json(result.rows)
       })
     })
 });
