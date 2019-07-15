@@ -8,7 +8,7 @@ var pool = new pg.Pool({connectionString: conString})
 
 app.get('/', express.static (path.join(__dirname, '../client')))
 
-/*app.post("/", jsonParser, function (request, response) {
+app.post("/", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     pool.connect(function (err, client, done) {
       if (err) {
@@ -23,16 +23,16 @@ app.get('/', express.static (path.join(__dirname, '../client')))
         if (err) {
           return next(err)
         }
-        response.json(request.body);
+        response.json(result.rows);
       })
     })
-});*/
+});
 
-app.post("/", jsonParser, function (request, response) {
+/*app.post("/", jsonParser, function (request, response) {
     console.log(request.body);
     if(!request.body) return response.sendStatus(400);
 
     response.json(request.body); // отправляем пришедший ответ обратно
-});
+});*/
 
 app.listen(3000)

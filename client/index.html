@@ -12,7 +12,29 @@
         <input type="number" name="userAge" /></br></br>
         <button type="submit" id="submit">Отправить</button>
     </form>
-    <img src="pic.png">
-    <script src="/app.js"></script>
+    <div id="allUsers"></div>
+    <script>
+      document.getElementById("submit").addEventListener("click", function (e) {
+           e.preventDefault();
+          // получаем данные формы
+          let registerForm = document.forms["registerForm"];
+          let userName = registerForm.elements["userName"].value;
+          let userAge = registerForm.elements["userAge"].value;
+          // сериализуем данные в json
+          let user = JSON.stringify({userName: userName, userAge: userAge});
+          let request = new XMLHttpRequest();
+          // посылаем запрос на адрес "/"
+           request.open("POST", "/", true);
+           request.setRequestHeader("Content-Type", "application/json");
+           request.addEventListener("load", function () {
+              // получаем и парсим ответ сервера
+              let receivedUsers = JSON.parse(request.response);
+              for (i = 0; i < receivedUsers.length; i++) {
+                  document.getElementById("allUsers").innerHTML = receivedUsers[i].name + ' ' + receivedUsers[i].age;
+              }
+           });
+           request.send(user);
+       });
+    </script>
   </body>
 </html>
