@@ -1,26 +1,14 @@
 const path = require('path')
 const express = require('express')
-const exphbs = require('express-handlebars')
-const hbs = require("hbs");
 const app = express()
 const pg = require('pg')
-const bodyParser = require("body-parser");
+const jsonParser = express.json();
 const conString = 'postgres://postgres:123456@localhost/node_hero'
 var pool = new pg.Pool({connectionString: conString})
-const urlencodedParser = bodyParser.urlencoded({extended: false});
-
-app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    extname: '.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts')
-}))
-app.set('view engine', '.hbs')
-app.set('views', path.join(__dirname, 'views'))
-app.listen(3000)
 
 app.get('/', express.static (path.join(__dirname, '../client')))
 
-app.post("/", urlencodedParser, function (request, response, next) {
+/*app.post("/", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     pool.connect(function (err, client, done) {
       if (err) {
@@ -35,7 +23,16 @@ app.post("/", urlencodedParser, function (request, response, next) {
         if (err) {
           return next(err)
         }
-        response.json(result.rows)
+        response.json(request.body);
       })
     })
+});*/
+
+app.post("/", jsonParser, function (request, response) {
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+
+    response.json(request.body); // отправляем пришедший ответ обратно
 });
+
+app.listen(3000)
