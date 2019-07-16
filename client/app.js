@@ -1,19 +1,21 @@
-document.getElementById("submit").addEventListener("click", function (e) {
-     e.preventDefault();
-    // получаем данные формы
-    let registerForm = document.forms["registerForm"];
-    let userName = registerForm.elements["userName"].value;
-    let userAge = registerForm.elements["userAge"].value;
-    // сериализуем данные в json
-    let user = JSON.stringify({userName: userName, userAge: userAge});
-    let request = new XMLHttpRequest();
-    // посылаем запрос на адрес "/user"
-     request.open("POST", "/", true);
-     request.setRequestHeader("Content-Type", "application/json");
-     request.addEventListener("load", function () {
-        // получаем и парсим ответ сервера
-         let receivedUser = JSON.parse(request.response);
-         console.log(receivedUser.userName, "-", receivedUser.userAge);   // смотрим ответ сервера
+document.getElementById("submit").addEventListener("click", function (e) { //обрабатываем клик на submit
+    e.preventDefault(); //отменяем стандарную реакцию браузера
+
+    let registerForm = document.forms["registerForm"]; //получаем данные формы
+    let userName = registerForm.elements["userName"].value; //добавляем элементы из формы
+    let userAge = registerForm.elements["userAge"].value; //и второй
+    let user = JSON.stringify({userName: userName, userAge: userAge}); //магия?
+    let request = new XMLHttpRequest(); //создаем новый ajax запрос
+    // посылаем запрос на адрес "/"
+     request.open("POST", "/", true); //адрес и тип запрос
+     request.setRequestHeader("Content-Type", "application/json"); //описание
+     request.addEventListener("load", function () { //слушаем ответ сервера
+        let receivedUsers = JSON.parse(request.response); //сервер прислал json, парсим его
+        for (i = 0; i <= receivedUsers.length; i++) { //json это массив объектов. Перебираем их все
+          let newLi = document.createElement('li'); //создаем новую строку
+          newLi.innerHTML = receivedUsers[i].name + ' ' + receivedUsers[i].age; //наполняем строку свойствами объектов
+          list.insertBefore(newLi, list.firstChild); //вставляем получившуюся строку первой
+        }
      });
-     request.send(user);
+     request.send(user); //отправляем браузеру получившуюся страницу
  });

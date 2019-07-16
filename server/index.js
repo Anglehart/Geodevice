@@ -6,7 +6,7 @@ const jsonParser = express.json();
 const conString = 'postgres://postgres:123456@localhost/node_hero'
 var pool = new pg.Pool({connectionString: conString})
 
-app.get('/', express.static (path.join(__dirname, '../client')))
+app.use('/', express.static (path.join(__dirname, '../client')))
 
 app.post("/", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
@@ -27,12 +27,5 @@ app.post("/", jsonParser, function (request, response) {
       })
     })
 });
-
-/*app.post("/", jsonParser, function (request, response) {
-    console.log(request.body);
-    if(!request.body) return response.sendStatus(400);
-
-    response.json(request.body); // отправляем пришедший ответ обратно
-});*/
 
 app.listen(3000)
