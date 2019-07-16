@@ -5,17 +5,28 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
     let userName = registerForm.elements["userName"].value; //добавляем элементы из формы
     let userAge = registerForm.elements["userAge"].value; //и второй
     let user = JSON.stringify({userName: userName, userAge: userAge}); //магия?
-    let request = new XMLHttpRequest(); //создаем новый ajax запрос
-    // посылаем запрос на адрес "/"
-     request.open("POST", "/", true); //адрес и тип запрос
-     request.setRequestHeader("Content-Type", "application/json"); //описание
-     request.addEventListener("load", function () { //слушаем ответ сервера
-        let receivedUsers = JSON.parse(request.response); //сервер прислал json, парсим его
+
+    fetch('/', {
+      method: 'POST',
+      body: user, // data может быть типа `string` или {object}!
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+
+    .then(function(response) {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+          return;
+        }
+
+      response.json().then(function(receivedUsers) { //Это мне не понятно...
         for (i = 0; i <= receivedUsers.length; i++) { //json это массив объектов. Перебираем их все
           let newLi = document.createElement('li'); //создаем новую строку
           newLi.innerHTML = receivedUsers[i].name + ' ' + receivedUsers[i].age; //наполняем строку свойствами объектов
           list.insertBefore(newLi, list.firstChild); //вставляем получившуюся строку первой
         }
-     });
-     request.send(user); //отправляем браузеру получившуюся страницу
- });
+      })
+  })
+});
