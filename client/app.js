@@ -21,8 +21,8 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
           return;
         }
 
-      response.json().then(function(receivedUsers) { //Это мне не понятно...
-        for (i = 0; i <= receivedUsers.length; i++) { //json это массив объектов. Перебираем их все
+      response.json().then(function(receivedUsers) { //Это мне не понятно... Почему не работает: let receivedUsers = JSON.parse(request.response);
+        for (i = 0; i < receivedUsers.length; i++) { //json это массив объектов. Перебираем их все
           let newLi = document.createElement('li'); //создаем новую строку
           newLi.innerHTML = receivedUsers[i].name + ' ' + receivedUsers[i].age; //наполняем строку свойствами объектов
           list.insertBefore(newLi, list.firstChild); //вставляем получившуюся строку первой
