@@ -6,7 +6,7 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
     let userAge = registerForm.elements["userAge"].value; //и второй
     let user = JSON.stringify({userName: userName, userAge: userAge}); //магия?
 
-    fetch('/', {
+    const req = fetch('/', {
       method: 'POST',
       body: user, // data может быть типа `string` или {object}!
       headers:{
@@ -14,19 +14,23 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
       }
     })
 
-    .then(function(response) {
-        if (response.status !== 200) {
-          console.log('Looks like there was a problem. Status Code: ' +
-            response.status);
-          return;
-        }
+    req.then(function(response) {
+      if (response.status !== 200) {
+        throw new Error('Статус не 200');;
+      } else {
+        return response.json();
+      }
+    })
 
-      response.json().then(function(receivedUsers) { //Это мне не понятно... Почему не работает: let receivedUsers = JSON.parse(request.response);
+    .then(function(receivedUsers) {
         for (i = 0; i < receivedUsers.length; i++) { //json это массив объектов. Перебираем их все
           let newLi = document.createElement('li'); //создаем новую строку
           newLi.innerHTML = receivedUsers[i].name + ' ' + receivedUsers[i].age; //наполняем строку свойствами объектов
           list.insertBefore(newLi, list.firstChild); //вставляем получившуюся строку первой
         }
-      })
-  })
+    })
+
+    .catch(function(error){
+      alert (error);
+    })
 });
