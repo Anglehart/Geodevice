@@ -1,10 +1,12 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-const router1 = require('./addUser');
+const addUser = require('./addUser');
+const showAllUsers = require('./showAllUsers');
 
 app.use(express.json());
-router1 (app)
+addUser (app)
+showAllUsers (app)
 app.use('/', express.static (path.join(__dirname, '../client')))
 
 app.listen(3000)

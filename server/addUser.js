@@ -1,6 +1,6 @@
 const pool = require('./connection'); //для модуля из этой же папки обязательно ставить ./
-module.exports = function router(app1){
-  app1.post("/user", function (request, response) {
+module.exports = function router(app){
+  app.post("/user", function (request, response) {
     if(!request.body) return response.sendStatus(400);
     pool.connect(function (err, client, done) {
       if (err) {
