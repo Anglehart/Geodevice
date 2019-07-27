@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-const usersRouter = require('./usersRouter');
+const usersRouter = require('./userRouter');
 
 app.use(express.json());
 app.use('/user', usersRouter);

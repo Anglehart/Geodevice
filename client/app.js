@@ -21,7 +21,7 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
       }
     })
     .then(function(receivedUser) {
-      alert ('Добавлен пользователь с id ' + receivedUser[0].id)
+      alert ('Добавлен пользователь с id ' + receivedUser)
     })
 
     .catch(function(error){
