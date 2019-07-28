@@ -108,6 +108,9 @@ document.getElementById("showUser").addEventListener("click", function (e) { //�
       alert (error);
     })
     .then(function(receivedUsers) {
+      if (receivedUsers.length == 0) {
+        return alert('Нет пользователя с таким ID');
+      }
       for (i = 0; i < receivedUsers.length; i++) {
         let newLi = document.createElement('li');
         newLi.innerHTML = receivedUsers[i].id + ' ' + receivedUsers[i].name + ' ' + receivedUsers[i].age;
