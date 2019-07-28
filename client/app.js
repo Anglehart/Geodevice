@@ -1,4 +1,4 @@
-document.getElementById("submit").addEventListener("click", function (e) { //обрабатываем клик на submit
+document.getElementById("submit").addEventListener("click", function (e) { //Добавить пользователя
     e.preventDefault(); //отменяем стандарную реакцию браузера
 
     let registerForm = document.forms["registerForm"]; //получаем данные формы
@@ -29,7 +29,7 @@ document.getElementById("submit").addEventListener("click", function (e) { //о�
     })
 });
 
-document.getElementById("showAll").addEventListener("click", function (e) { //обрабатываем клик на submit
+document.getElementById("showAll").addEventListener("click", function (e) { //Показать всех пользователей
 e.preventDefault(); //отменяем стандарную реакцию браузера
     fetch('/user', {
       method: 'GET',
@@ -54,7 +54,7 @@ e.preventDefault(); //отменяем стандарную реакцию бр�
 
 });
 
-document.getElementById("deleteUser").addEventListener("click", function (e) {
+document.getElementById("deleteUser").addEventListener("click", function (e) { //Удалить одного пользователя
     e.preventDefault();
 
     let registerForm = document.forms["registerForm"];
@@ -77,6 +77,42 @@ document.getElementById("deleteUser").addEventListener("click", function (e) {
       }
     })
 
+    .catch(function(error){
+      alert (error);
+    })
+});
+
+document.getElementById("showUser").addEventListener("click", function (e) { //Возвращает одного пользователя
+    e.preventDefault();
+
+    let registerForm = document.forms["registerForm"];
+    let userId = registerForm.elements["userId"].value;
+    let user = JSON.stringify({userId: userId});
+
+    fetch('/user/id', {
+      method: 'POST',
+      body: user,
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      if (response.status !== 200) {
+        throw new Error('Статус не 200');
+      } else {
+        return response.json();
+      }
+    })
+    .catch(function(error){
+      alert (error);
+    })
+    .then(function(receivedUsers) {
+      for (i = 0; i < receivedUsers.length; i++) {
+        let newLi = document.createElement('li');
+        newLi.innerHTML = receivedUsers[i].id + ' ' + receivedUsers[i].name + ' ' + receivedUsers[i].age;
+        list.insertBefore(newLi, list.firstChild);
+      }
+    })
     .catch(function(error){
       alert (error);
     })

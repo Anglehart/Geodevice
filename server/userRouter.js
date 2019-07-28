@@ -25,10 +25,19 @@ router.delete("/id", function (request, response) {
   if(!request.body) return response.sendStatus(400);
   db.any('DELETE FROM users WHERE id = $1;', [request.body.userId])
     .then(function (data) {
-      return response.json(data);
+      return response.json(data); //Возвращаем хуй знает что, лишь бы был ответ
     })
     .catch(function (error) {
       console.log("ERROR:", error);
   });
 });
+
+router.post("/id", function (request, response) {
+  if(!request.body) return response.sendStatus(400);
+  db.any('SELECT name, age, id FROM users WHERE id = $1;', [request.body.userId])
+  .then(function (data) {
+    return response.json(data);
+  })
+})
+
 module.exports = router;
