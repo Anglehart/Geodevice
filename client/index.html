@@ -4,14 +4,18 @@
     <title></title>
   </head>
   <body>
-    <h1>Введите данные</h1>
+    <h2>Введите данные</h2>
     <form name="registerForm">
         <label>Имя</label></br>
         <input type="text" name="userName" /></br></br>
         <label>Возраст</label></br>
         <input type="number" name="userAge" /></br></br>
+        <label>ID</label></br>
+        <input type="number" name="userId" /></br></br>
         <button type="submit" id="submit">Добавить пользователя</button>
         <button type="submit" id="showAll">Показать всех пользователей</button>
+        <button type="deleteUser" id="deleteUser">Удалить пользователя по ID</button>
+        <button type="showUser" id="showUse">Показать пользователя по ID</button>
     </form>
     <div id="allUsers">
       <ul id="list"></ul>

@@ -16,10 +16,19 @@ router.post("/", function (request, response) {
 router.get("/", function (request, response) {
   if(!request.body) return response.sendStatus(400);
   db.any('SELECT name, age, id FROM users;')
-
   .then(function (data) {
     return response.json(data);
   })
 })
 
+router.delete("/id", function (request, response) {
+  if(!request.body) return response.sendStatus(400);
+  db.any('DELETE FROM users WHERE id = $1;', [request.body.userId])
+    .then(function (data) {
+      return response.json(data);
+    })
+    .catch(function (error) {
+      console.log("ERROR:", error);
+  });
+});
 module.exports = router;

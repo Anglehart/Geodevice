@@ -53,3 +53,31 @@ e.preventDefault(); //отменяем стандарную реакцию бр�
       })
 
 });
+
+document.getElementById("deleteUser").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    let registerForm = document.forms["registerForm"];
+    let userId = registerForm.elements["userId"].value;
+    let user = JSON.stringify({userId: userId});
+
+    fetch('/user/id', {
+      method: 'DELETE',
+      body: user,
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      if (response.status !== 200) {
+        throw new Error('Статус не 200');
+      } else {
+        console.log(userId);
+        alert ('Удален пользователь с id ' + userId)
+      }
+    })
+
+    .catch(function(error){
+      alert (error);
+    })
+});
