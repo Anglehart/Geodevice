@@ -146,7 +146,11 @@ document.getElementById("editUser").addEventListener("click", function (e) { //�
       }
     })
     .then(function(receivedUser) {
-      alert ('Обновлен пользователь с ID ' + receivedUser.id + ' Имя ' + receivedUser.name + ' Возраст ' + receivedUser.age)
+      if (receivedUser.id != true) {
+        alert ('Нет пользователя с таким ID');
+      } else {
+        alert ('Обновлен пользователь с ID ' + receivedUser.id + ' Имя ' + receivedUser.name + ' Возраст ' + receivedUser.age)
+      }
     })
 
     .catch(function(error){

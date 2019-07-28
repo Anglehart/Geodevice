@@ -47,7 +47,7 @@ router.put("/id", function (request, response) { //Изменить пользо
       return response.json(data);
     })
     .catch(function (error) {
-      console.log("ERROR:", error);
+      return response.json(error);
   });
 });
 module.exports = router;
