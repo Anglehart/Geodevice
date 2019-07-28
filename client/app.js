@@ -21,7 +21,7 @@ document.getElementById("newUser").addEventListener("click", function (e) { //Д
       }
     })
     .then(function(receivedUser) {
-      alert ('Добавлен пользователь с id ' + receivedUser)
+      alert ('Добавлен пользователь с id ' + receivedUser.id)
     })
 
     .catch(function(error){
@@ -72,13 +72,14 @@ document.getElementById("deleteUser").addEventListener("click", function (e) { /
       if (response.status !== 200) {
         throw new Error('Статус не 200');
       } else {
-        console.log(userId);
-        alert ('Удален пользователь с id ' + userId)
+        return response.json();
       }
     })
-
+    .then(function(receivedUsers) {
+      alert('Удален пользователь с ID ' + receivedUsers[0].id)
+    })
     .catch(function(error){
-      alert (error);
+      alert ('Нет такого пользователя');
     })
 });
 
