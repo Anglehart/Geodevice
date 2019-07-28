@@ -1,4 +1,4 @@
-document.getElementById("submit").addEventListener("click", function (e) { //Добавить пользователя
+document.getElementById("newUser").addEventListener("click", function (e) { //Добавить пользователя
     e.preventDefault(); //отменяем стандарную реакцию браузера
 
     let registerForm = document.forms["registerForm"]; //получаем данные формы
@@ -113,6 +113,38 @@ document.getElementById("showUser").addEventListener("click", function (e) { //�
         list.insertBefore(newLi, list.firstChild);
       }
     })
+    .catch(function(error){
+      alert (error);
+    })
+});
+
+document.getElementById("editUser").addEventListener("click", function (e) { //Изменить пользователя
+    e.preventDefault();
+
+    let registerForm = document.forms["registerForm"];
+    let userName = registerForm.elements["userName"].value;
+    let userAge = registerForm.elements["userAge"].value;
+    let userId = registerForm.elements["userId"].value;
+    let user = JSON.stringify({userName: userName, userAge: userAge, userId: userId});
+
+    fetch('/user/id', {
+      method: 'PUT',
+      body: user, // data может быть типа `string` или {object}!
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      if (response.status !== 200) {
+        throw new Error('Статус не 200');
+      } else {
+        return response.json();
+      }
+    })
+    .then(function(receivedUser) {
+      alert ('Обновлен пользователь с ID ' + receivedUser.id + ' Имя ' + receivedUser.name + ' Возраст ' + receivedUser.age)
+    })
+
     .catch(function(error){
       alert (error);
     })
