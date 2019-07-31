@@ -44,6 +44,7 @@ router.put("/id", function (request, response) { //Изменить пользо
   if(!request.body) return response.sendStatus(400);
   db.one('UPDATE Users SET name = $1, age = $2 WHERE id = $3 RETURNING id, name, age; ', [request.body.userName, request.body.userAge, request.body.userId])
     .then(function (data) {
+      console.log(data);
       return response.json(data);
     })
     .catch(function (error) {

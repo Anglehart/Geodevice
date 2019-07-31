@@ -107,13 +107,13 @@ document.getElementById("showUser").addEventListener("click", function (e) { //�
     .catch(function(error){
       alert (error);
     })
-    .then(function(receivedUsers) {
+    .then(function(receivedUsers) { //исправить
       if (receivedUsers.length == 0) {
         return alert('Нет пользователя с таким ID');
       }
       for (i = 0; i < receivedUsers.length; i++) {
         let newLi = document.createElement('li');
-        newLi.innerHTML = receivedUsers[i].id + ' ' + receivedUsers[i].name + ' ' + receivedUsers[i].age;
+        newLi.innerHTML = receivedUsers.id + ' ' + receivedUsers.name + ' ' + receivedUsers.age;
         list.insertBefore(newLi, list.firstChild);
       }
     })
