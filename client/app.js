@@ -59,11 +59,10 @@ document.getElementById("deleteUser").addEventListener("click", function (e) { /
 
     let registerForm = document.forms["registerForm"];
     let userId = registerForm.elements["userId"].value;
-    let user = JSON.stringify({userId: userId});
+    let url = '/user/id?userId=' + userId;
 
-    fetch('/user/id', {
+    fetch(url, {
       method: 'DELETE',
-      body: user,
       headers:{
         'Content-Type': 'application/json'
       }
@@ -88,11 +87,10 @@ document.getElementById("showUser").addEventListener("click", function (e) { //�
 
     let registerForm = document.forms["registerForm"];
     let userId = registerForm.elements["userId"].value;
-    let user = JSON.stringify({userId: userId});
+    let url = '/user/id?userId=' + userId;
 
-    fetch('/user/id', {
-      method: 'POST',
-      body: user,
+    fetch(url, {
+      method: 'GET',
       headers:{
         'Content-Type': 'application/json'
       }
@@ -107,14 +105,12 @@ document.getElementById("showUser").addEventListener("click", function (e) { //�
     .catch(function(error){
       alert (error);
     })
-    .then(function(receivedUsers) { //исправить
-      if (receivedUsers.length == 0) {
+    .then(function(receivedUser) {
+      console.log(receivedUser);
+      if (receivedUser.length == 0) {
         return alert('Нет пользователя с таким ID');
-      }
-      for (i = 0; i < receivedUsers.length; i++) {
-        let newLi = document.createElement('li');
-        newLi.innerHTML = receivedUsers.id + ' ' + receivedUsers.name + ' ' + receivedUsers.age;
-        list.insertBefore(newLi, list.firstChild);
+      } else {
+        alert('ID: ' + receivedUser.id + ' Имя: ' + receivedUser.name + ' Возраст: ' + receivedUser.age);
       }
     })
     .catch(function(error){
