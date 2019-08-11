@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('./connection'); //для модуля из этой же папки обязательно ставить ./
 
-router.post("/", function (request, response) { //Добавление пользователя, возврат ID
+router.post("/user", function (request, response) { //Добавление пользователя, возврат ID
   if(!request.body) return response.sendStatus(400);
-  db.one('INSERT INTO users (name, age) VALUES ($1, $2) RETURNING id', [request.body.userName, request.body.userAge])
+  console.log(request.body);
+  db.one('INSERT INTO orders (ourId) VALUES ($1) RETURNING ourId', [request.body])
     .then(function (data) {
       return response.json(data);
     })
