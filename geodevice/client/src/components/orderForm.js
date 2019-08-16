@@ -58,9 +58,10 @@ class OrderForm extends React.Component {
   }
 
   handleCreate() {
-    fetch('/user', {
+    alert(JSON.stringify(this.state))
+    fetch('http://127.0.0.1:3001/user', {
       method: 'POST',
-      body: 'this.state.ourId', // data может быть типа `string` или {object}!
+      body: this.state, // data может быть типа `string` или {object}!
       headers:{
         'Content-Type': 'application/json'
       }
@@ -69,14 +70,16 @@ class OrderForm extends React.Component {
       if (response.status !== 200) {
         throw new Error('Статус не 200');
       } else {
-        console.log(response.json());
         return response.json();
       }
     })
+    .catch(function(error){
+      alert (error);
+    })
+
     .then(function(receivedUser) {
       alert ('Добавлен пользователь с id ' + receivedUser.id)
     })
-
     .catch(function(error){
       alert (error);
     })
