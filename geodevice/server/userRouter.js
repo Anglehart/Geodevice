@@ -3,9 +3,8 @@ const router = express.Router();
 const db = require('./connection'); //для модуля из этой же папки обязательно ставить ./
 
 router.post("/user", function (request, response) { //Добавление пользователя, возврат ID
-  console.log(request.body);
-  if(!request.body) return response.sendStatus(400);
-  db.one('INSERT INTO orders (ourId) VALUES ($1) RETURNING ourId', [request.body])
+  if(!request.body) return response.sendStatus(400)
+  //db.one('INSERT INTO orders (ourId) VALUES ($1) RETURNING ourId', [request.body.ourId])
     .then(function (data) {
       return response.json(data);
     })
