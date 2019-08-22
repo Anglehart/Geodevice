@@ -59,17 +59,17 @@ class OrderForm extends React.Component {
 
   handleCreate() {
     let data = JSON.stringify(this.state);
+    console.log(data);
     fetch('http://localhost:3001/user', {
       method: 'POST',
       body: data,
-      mode: 'cors',
       headers:{
         'Content-Type': 'application/json'
       }
     })
     .then(function(response) {
       if (response.status !== 200) {
-        throw new Error('Статус не 200');
+        throw new Error(response.status);
       } else {
         return response.json();
       }
