@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('./connection'); //для модуля из этой же папки обязательно ставить ./
 
 router.post("/", function (request, response) { //Добавление пользователя, возврат ID
+  console.log(request.body.ourId);
   if(!request.body) return response.sendStatus(400);
   db.one('INSERT INTO orders (ourid) VALUES ($1) RETURNING ourid', [request.body.ourId])
     .then(function (data) {
@@ -14,7 +15,7 @@ router.post("/", function (request, response) { //Добавление поль�
   });
 });
 
-router.get("/", function (request, response) { //Показать всех пользователей
+/*router.get("/", function (request, response) { //Показать всех пользователей
   if(!request.body) return response.sendStatus(400);
   db.any('SELECT name, age, id FROM users;')
   .then(function (data) {
@@ -49,5 +50,5 @@ router.put("/id", function (request, response) { //Изменить пользо
     .catch(function (error) {
       return response.json(error);
   });
-});
+});*/
 module.exports = router;

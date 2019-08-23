@@ -31,7 +31,7 @@ class OrderForm extends React.Component {
           </div>
           <div className="addOrder">
             <label>Контактный телефон</label><br />
-            <input type="number" name="contactPhone" />
+            <input type="text" name="contactPhone" />
           </div>
           <div className="addOrder">
             <label>Компания</label><br />
