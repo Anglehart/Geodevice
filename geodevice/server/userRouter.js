@@ -4,9 +4,9 @@ const db = require('./connection'); //для модуля из этой же п�
 
 router.post("/", function (request, response) { //Добавление пользователя, возврат ID
   if(!request.body) return response.sendStatus(400);
-  console.log('ok');
-  db.one('INSERT INTO orders (ourId) VALUES ($1) RETURNING ourId', [request.body.ourId])
+  db.one('INSERT INTO orders (ourid) VALUES ($1) RETURNING ourid', [request.body.ourId])
     .then(function (data) {
+      console.log(data);
       return response.json(data);
     })
     .catch(function (error) {

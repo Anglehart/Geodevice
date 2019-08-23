@@ -60,7 +60,7 @@ class OrderForm extends React.Component {
   handleCreate() {
     let data = JSON.stringify(this.state);
     console.log(data);
-    fetch('http://localhost:3001/user', {
+    fetch('http://127.0.0.1:3001/orders', {
       method: 'POST',
       body: data,
       headers:{
@@ -75,15 +75,16 @@ class OrderForm extends React.Component {
       }
     })
     .catch(function(error){
-      alert (error);
+      alert ('Ошибка ' + error);
     })
 
-    /*.then(function(receivedUser) {
-      alert ('Добавлен пользователь с id ' + receivedUser.id)
+    .then(function(receivedOrder) {
+      console.log(receivedOrder.ourid);
+      alert ('Добавлен заказ с id ' + receivedOrder.ourid)
     })
     .catch(function(error){
       alert (error);
-    })*/
+    })
       //alert("Наш ID: " + this.state.ourId);
       //alert("Контакное лицо: " + this.state.contactName);
   }

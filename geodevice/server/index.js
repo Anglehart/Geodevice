@@ -6,7 +6,6 @@ const cors = require('cors')
 app.use(cors())
 
 app.use(express.json());
-app.use('/user', usersRouter);
-//app.use('/', express.static (path.join(__dirname, '../client/src')))
+app.use('/orders', usersRouter);
 
 app.listen(3001)
