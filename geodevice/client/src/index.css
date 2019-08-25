@@ -1,18 +1,32 @@
-body {
+#grid {
+  display: grid;
+  grid-template-areas:
+  “formFields addOrderButtons”;
+  grid-template-columns: 4fr 1fr;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  border: 1px solid black;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.formFields {
+  display: grid;
+  grid-template-areas:
+  “addOrder addOrder addOrder addOrder”
+  “addOrder addOrder addOrder .”;
+  grid-template-columns: repeat(4, 1fr);
+  border-right: 1px solid black;
 }
 .addOrder{
-  width: 12%;
+  margin: 5px;
   text-align: center;
-  float: left;
+}
+button {
+  margin: 5px;
+  min-width: 140px;
+  font-size: 16px;
+
+}
+.addOrderButtons{
+    text-align: center;
+}
+input {
+  font-size: 16px;
 }

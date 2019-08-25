@@ -22,7 +22,8 @@ class OrderForm extends React.Component {
 
     render() {
       return (
-        <form name="addOrderForm">
+        <form name="addOrderForm" id="grid">
+        <div className="formFields">
           <div className="addOrder">
             <input type="number" placeholder="Учетный номер" name="ourId" value={this.state.ourId} onChange={this.handleOurIdChange} />
           </div>
@@ -30,26 +31,22 @@ class OrderForm extends React.Component {
             <input type="text" placeholder="Контактное лицо" name="contactName" value={this.state.contactName} onChange={this.handleContactNameChange} />
           </div>
           <div className="addOrder">
-            <label>Контактный телефон</label><br />
-            <input type="text" name="contactPhone" />
+            <input type="text" placeholder="Контактный телефон" name="contactPhone" />
           </div>
           <div className="addOrder">
-            <label>Компания</label><br />
-            <input type="text" name="companyName" />
+            <input type="text" placeholder="Компания" name="companyName" />
           </div>
           <div className="addOrder">
-            <label>Прибор</label><br />
-            <input type="text" name="deviceName" />
+            <input type="text" placeholder="Прибор" name="deviceName" />
           </div>
           <div className="addOrder">
-            <label>Серийный номер</label><br />
-            <input type="text" name="deviceSn" />
+            <input type="text" placeholder="Серийный номер" name="deviceSn" />
           </div>
           <div className="addOrder">
-            <label>Мастер</label><br />
-            <input type="text" name="masterName" />
+            <input type="text" placeholder="Мастер" name="masterName" />
           </div>
-          <div className="addOrder">
+          </div>
+          <div className="addOrderButtons">
             <button type="submit" id="newOrder" onClick={this.handleCreate}>Добавить заказ</button><br />
             <button type="submit" id="changeOrder">Изменить заказ</button><br />
           </div>
