@@ -57,10 +57,11 @@ class OrderForm extends React.Component {
   handleCreate() {
     let data = JSON.stringify(this.state);
     console.log(data);
-    fetch('http://127.0.0.1:3001/orders', {
+    fetch('http://localhost:3001/orders', {
       method: 'POST',
       body: data,
       headers:{
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     })
@@ -71,8 +72,8 @@ class OrderForm extends React.Component {
         return response.json();
       }
     })
-    .catch(function(error){
-      alert ('Ошибка ' + error);
+    .catch(function(error){ // Ошибка выпадает здесь
+      alert ('Ошибка сервера ' + error);
     })
 
     .then(function(receivedOrder) {

@@ -11,7 +11,7 @@ router.post("/", function (request, response) { //Добавление поль�
       return response.json(data);
     })
     .catch(function (error) {
-      console.log("ERROR:", error);
+      console.log("Ошибка: ", error);
   });
 });
 
