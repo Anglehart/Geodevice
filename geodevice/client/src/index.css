@@ -1,16 +1,11 @@
 #grid {
   display: grid;
-  grid-template-areas:
-  “formFields addOrderButtons”;
   grid-template-columns: 4fr 1fr;
   margin: 0;
   border: 1px solid black;
 }
 .formFields {
   display: grid;
-  grid-template-areas:
-  “addOrder addOrder addOrder addOrder”
-  “addOrder addOrder addOrder .”;
   grid-template-columns: repeat(4, 1fr);
   border-right: 1px solid black;
 }
@@ -29,4 +24,5 @@ button {
 }
 input {
   font-size: 16px;
+  min-width: 180px;
 }
