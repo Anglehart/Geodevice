@@ -4,25 +4,29 @@ class OrderForm extends React.Component {
     super(props);
     this.state = {
       ourId: '',
-      contactName: ''
+      contactName: '',
+      contactPhone: ''
     };
     //Эти строки не понятны
     this.handleOurIdChange = this.handleOurIdChange.bind(this)
     this.handleContactNameChange = this.handleContactNameChange.bind(this)
+    this.handleContactPhoneChange = this.handleContactPhoneChange.bind(this)
     this.handleCreate = this.handleCreate.bind(this)
   }
 
   handleOurIdChange(e) {
-     this.setState({ourId: e.target.value});
+    this.setState({ourId: e.target.value});
   }
-
   handleContactNameChange(e) {
-     this.setState({contactName: e.target.value});
+    this.setState({contactName: e.target.value});
+  }
+  handleContactPhoneChange(e) {
+    this.setState({contactPhone: e.target.value});
   }
 
     render() {
       return (
-        <form name="addOrderForm" id="grid">
+        <div name="addOrderForm" id="grid">
         <div className="formFields">
           <div className="addOrder">
             <input type="number" placeholder="Учетный номер" name="ourId" value={this.state.ourId} onChange={this.handleOurIdChange} />
@@ -31,7 +35,7 @@ class OrderForm extends React.Component {
             <input type="text" placeholder="Контактное лицо" name="contactName" value={this.state.contactName} onChange={this.handleContactNameChange} />
           </div>
           <div className="addOrder">
-            <input type="text" placeholder="Контактный телефон" name="contactPhone" />
+            <input type="text" placeholder="Контактный телефон" name="contactPhone" value={this.state.contactPhone} onChange={this.handleContactPhoneChange} />
           </div>
           <div className="addOrder">
             <input type="text" placeholder="Компания" name="companyName" />
@@ -47,16 +51,15 @@ class OrderForm extends React.Component {
           </div>
           </div>
           <div className="addOrderButtons">
-            <button type="submit" id="newOrder" onClick={this.handleCreate}>Добавить заказ</button><br />
-            <button type="submit" id="changeOrder">Изменить заказ</button><br />
+            <button id="newOrder" onClick={this.handleCreate}>Добавить заказ</button><br />
+            <button id="changeOrder">Изменить заказ</button><br />
           </div>
-        </form>
+        </div>
     )
   }
 
   handleCreate() {
     let data = JSON.stringify(this.state);
-    console.log(data);
     fetch('http://localhost:3001/orders', {
       method: 'POST',
       body: data,
@@ -72,7 +75,7 @@ class OrderForm extends React.Component {
         return response.json();
       }
     })
-    .catch(function(error){ // Ошибка выпадает здесь
+    .catch(function(error){
       alert ('Ошибка сервера ' + error);
     })
 
