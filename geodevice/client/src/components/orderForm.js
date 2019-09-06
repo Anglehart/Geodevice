@@ -5,12 +5,20 @@ class OrderForm extends React.Component {
     this.state = {
       ourId: '',
       contactName: '',
-      contactPhone: ''
+      contactPhone: '',
+      companyName: '',
+      deviceName: '',
+      deviceSn: '',
+      masterName: ''
     };
     //Эти строки не понятны
     this.handleOurIdChange = this.handleOurIdChange.bind(this)
     this.handleContactNameChange = this.handleContactNameChange.bind(this)
     this.handleContactPhoneChange = this.handleContactPhoneChange.bind(this)
+    this.handleCompanyNameChange = this.handleCompanyNameChange.bind(this)
+    this.handleDeviceNameChange = this.handleDeviceNameChange.bind(this)
+    this.handleDeviceSnChange = this.handleDeviceSnChange.bind(this)
+    this.handleMasterNameChange = this.handleMasterNameChange.bind(this)
     this.handleCreate = this.handleCreate.bind(this)
   }
 
@@ -22,6 +30,18 @@ class OrderForm extends React.Component {
   }
   handleContactPhoneChange(e) {
     this.setState({contactPhone: e.target.value});
+  }
+  handleCompanyNameChange(e) {
+    this.setState({companyName: e.target.value});
+  }
+  handleDeviceNameChange(e) {
+    this.setState({deviceName: e.target.value});
+  }
+  handleDeviceSnChange(e) {
+    this.setState({deviceSn: e.target.value});
+  }
+  handleMasterNameChange(e) {
+    this.setState({masterName: e.target.value});
   }
 
     render() {
@@ -38,16 +58,16 @@ class OrderForm extends React.Component {
             <input type="text" placeholder="Контактный телефон" name="contactPhone" value={this.state.contactPhone} onChange={this.handleContactPhoneChange} />
           </div>
           <div className="addOrder">
-            <input type="text" placeholder="Компания" name="companyName" />
+            <input type="text" placeholder="Компания" name="companyName" value={this.state.companyName} onChange={this.handleCompanyNameChange}/>
           </div>
           <div className="addOrder">
-            <input type="text" placeholder="Прибор" name="deviceName" />
+            <input type="text" placeholder="Прибор" name="deviceName" value={this.state.deviceName} onChange={this.handleDeviceNameChange}/>
           </div>
           <div className="addOrder">
-            <input type="text" placeholder="Серийный номер" name="deviceSn" />
+            <input type="text" placeholder="Серийный номер" name="deviceSn" value={this.state.deviceSn} onChange={this.handleDeviceSnChange}/>
           </div>
           <div className="addOrder">
-            <input type="text" placeholder="Мастер" name="masterName" />
+            <input type="text" placeholder="Мастер" name="masterName" value={this.state.masterName} onChange={this.handleMasterNameChange}/>
           </div>
           </div>
           <div className="addOrderButtons">
