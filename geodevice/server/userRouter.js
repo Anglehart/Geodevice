@@ -14,14 +14,15 @@ router.post("/", function (request, response) { //Добавление поль�
   });
 });
 
-/*router.get("/", function (request, response) { //Показать всех пользователей
+router.get("/", function (request, response) { //Показать всех пользователей
   if(!request.body) return response.sendStatus(400);
-  db.any('SELECT name, age, id FROM users;')
+  db.any('SELECT ourid, contactname, contactphone FROM orders;')
   .then(function (data) {
     return response.json(data);
   })
 })
 
+/*
 router.delete("/id", function (request, response) { //Удалить пользователя по ID
   db.any('DELETE FROM users WHERE id = $1 RETURNING id;', [request.query.userId])
     .then(function (data) {

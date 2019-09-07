@@ -100,14 +100,18 @@ class OrderForm extends React.Component {
     })
 
     .then(function(receivedOrder) {
-      console.log(receivedOrder.ourid);
       alert ('Добавлен заказ с id ' + receivedOrder.ourid)
     })
     .catch(function(error){
       alert (error);
     })
-      //alert("Наш ID: " + this.state.ourId);
-      //alert("Контакное лицо: " + this.state.contactName);
+
+    .then(function() {
+      console.log(data);
+    })
+    .catch(function(error){
+      alert (error);
+    })
   }
 }
 
