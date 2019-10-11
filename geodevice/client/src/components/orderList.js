@@ -1,6 +1,6 @@
 //Получаем исходные данные из базы
 import React from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import BootstrapTable from 'react-bootstrap-table-next';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 const data = [
@@ -8,6 +8,7 @@ const data = [
   {ourid: 2, contactname: 'Buster', contactphone: '5'},
   {ourid: 3, contactname: 'George Michael', contactphone: '4'}
 ];
+
 
 class OrderList extends React.Component {
   constructor(props) {
@@ -33,25 +34,28 @@ class OrderList extends React.Component {
       }
     })
     .then(function(receivedOrders) {
-      return(receivedOrders)
+      this.setState ({
+        data: receivedOrders
+      })
     })
   }
 
-
     render() {
+      const columns = [{
+          dataField: 'ourid',
+          text: 'Наш ID'
+        }, {
+          dataField: 'contactname',
+          text: 'Имя заказчика'
+        }, {
+          dataField: 'contactphone',
+          text: 'Телефон'
+      }];
+      console.log(this.state.data)
+
       return (
         <div>
-          <BootstrapTable data={data}>
-            <TableHeaderColumn isKey dataField='ourid'>
-              Учетный номер
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField='contactname'>
-              Имя
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField='contactphone'>
-              Телефон
-            </TableHeaderColumn>
-          </BootstrapTable>
+          <BootstrapTable keyField='ourid' data={data} columns={ columns } />
         </div>
       );
     }
