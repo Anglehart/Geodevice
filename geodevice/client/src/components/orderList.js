@@ -40,7 +40,7 @@ class OrderList extends React.Component {
 
       return (
         <div>
-          <BootstrapTable keyField='ourid' data={this.state.data} columns={ columns } />
+          <BootstrapTable keyField='id' data={this.state.data} columns={ columns } />
         </div>
       );
     }
