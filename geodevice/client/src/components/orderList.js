@@ -1,6 +1,7 @@
 //Получаем исходные данные из базы
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 class OrderList extends React.Component {
@@ -28,18 +29,18 @@ class OrderList extends React.Component {
     render() {
       this.getAllOrders()
       const columns = [
-        {dataField: 'ourid', text: 'Наш ID'},
-        {dataField: 'contactname', text: 'Имя заказчика'},
-        {dataField: 'contactphone', text: 'Телефон'},
-        {dataField: 'companyname', text: 'Компания'},
-        {dataField: 'devicename', text: 'Прибор'},
-        {dataField: 'devicesn', text: 'Серийный номер'},
-        {dataField: 'mastername', text: 'Мастер'}
+        {dataField: 'ourid', text: 'Наш ID', sort: true},
+        {dataField: 'contactname', text: 'Имя заказчика', sort: true},
+        {dataField: 'contactphone', text: 'Телефон', sort: true},
+        {dataField: 'companyname', text: 'Компания', sort: true},
+        {dataField: 'devicename', text: 'Прибор', sort: true},
+        {dataField: 'devicesn', text: 'Серийный номер', sort: true},
+        {dataField: 'mastername', text: 'Мастер', sort: true}
       ];
-
+      const defaultSorted = [{dataField: 'ourid', order: 'desc'}];
       return (
         <div>
-          <BootstrapTable keyField='id' data={this.state.data} columns={ columns } />
+          <BootstrapTable keyField='id' data={this.state.data} columns={ columns } defaultSorted={ defaultSorted } pagination={ paginationFactory() }/>
         </div>
       );
     }
