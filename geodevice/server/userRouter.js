@@ -16,7 +16,7 @@ router.post("/", function (request, response) { //Добавление поль�
 
 router.get("/", function (request, response) { //Показать всех пользователей
   if(!request.body) return response.sendStatus(400);
-  db.any('SELECT id, ourid, contactname, contactphone FROM orders;')
+  db.any('SELECT id, ourid, contactname, contactphone, companyname, devicename, devicesn, mastername FROM orders;')
   .then(function (data) {
     return response.json(data);
   })

@@ -98,20 +98,6 @@ class OrderForm extends React.Component {
     .catch(function(error){
       alert ('Ошибка сервера ' + error);
     })
-
-    .then(function(receivedOrder) {
-      alert ('Добавлен заказ с id ' + receivedOrder.ourid)
-    })
-    .catch(function(error){
-      alert (error);
-    })
-
-    .then(function() {
-      console.log(data);
-    })
-    .catch(function(error){
-      alert (error);
-    })
   }
 }
 

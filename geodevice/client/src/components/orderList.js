@@ -27,16 +27,15 @@ class OrderList extends React.Component {
 
     render() {
       this.getAllOrders()
-      const columns = [{
-          dataField: 'ourid',
-          text: 'Наш ID'
-        }, {
-          dataField: 'contactname',
-          text: 'Имя заказчика'
-        }, {
-          dataField: 'contactphone',
-          text: 'Телефон'
-      }];
+      const columns = [
+        {dataField: 'ourid', text: 'Наш ID'},
+        {dataField: 'contactname', text: 'Имя заказчика'},
+        {dataField: 'contactphone', text: 'Телефон'},
+        {dataField: 'companyname', text: 'Компания'},
+        {dataField: 'devicename', text: 'Прибор'},
+        {dataField: 'devicesn', text: 'Серийный номер'},
+        {dataField: 'mastername', text: 'Мастер'}
+      ];
 
       return (
         <div>

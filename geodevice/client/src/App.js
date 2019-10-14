@@ -6,8 +6,10 @@ class Root extends React.Component {
 
     render() {
       return (
+        <div>
         <OrderForm />,
         <OrderList />
+        </div>
     )
   }
 }
