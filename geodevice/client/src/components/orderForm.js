@@ -49,7 +49,7 @@ class OrderForm extends React.Component {
         <div name="addOrderForm" id="grid">
         <div className="formFields">
           <div className="addOrder">
-            <input type="number" placeholder="Учетный номер" name="ourId" value={this.state.ourId} onChange={this.handleOurIdChange} />
+            <input type="text" placeholder="Учетный номер" name="ourId" value={this.state.ourId} onChange={this.handleOurIdChange} />
           </div>
           <div className="addOrder">
             <input type="text" placeholder="Контактное лицо" name="contactName" value={this.state.contactName} onChange={this.handleContactNameChange} />
