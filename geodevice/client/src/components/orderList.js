@@ -2,6 +2,7 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 class OrderList extends React.Component {
@@ -9,8 +10,19 @@ class OrderList extends React.Component {
     super(props);
     this.getAllOrders = this.getAllOrders.bind(this)
     this.state = {
-      data: []
+      data: [],
+      changedRow: "",
+      changedColumn: ""
     }
+    this.getAllOrders();
+  }
+
+  async changeOneOrder(row, column) {
+    await this.setState ({
+      changedRow: row.id,
+      changedColumn: column.dataField
+    })
+    await console.log (this.state.changedColumn)
   }
 
   async getAllOrders() {
@@ -27,7 +39,6 @@ class OrderList extends React.Component {
   }
 
     render() {
-      this.getAllOrders()
       const columns = [
         {dataField: 'ourid', text: 'Наш ID', sort: true},
         {dataField: 'contactname', text: 'Имя заказчика', sort: true},
@@ -40,7 +51,17 @@ class OrderList extends React.Component {
       const defaultSorted = [{dataField: 'ourid', order: 'desc'}];
       return (
         <div>
-          <BootstrapTable keyField='id' data={this.state.data} columns={ columns } defaultSorted={ defaultSorted } pagination={ paginationFactory() }/>
+          <BootstrapTable
+          keyField='id'
+          data={this.state.data}
+          columns={columns}
+          defaultSorted={defaultSorted}
+          pagination={paginationFactory()}
+          cellEdit={cellEditFactory({
+            mode: 'dbclick',
+            afterSaveCell: (oldValue, newValue, row, column) => {this.changeOneOrder(row, column)}
+          })}
+          />
         </div>
       );
     }
