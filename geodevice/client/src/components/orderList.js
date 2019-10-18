@@ -12,18 +12,30 @@ class OrderList extends React.Component {
     this.state = {
       data: [],
       changedRow: "",
-      changedColumn: ""
+      changedColumn: "",
+      newValue: ""
     }
     this.getAllOrders();
   }
 
-  async changeOneOrder(row, column) {
+  async changeOneOrder(newValue, row, column) {
     await this.setState ({
-      changedRow: row.id,
-      changedColumn: column.dataField
+      changedRow: row,
+      changedColumn: column,
+      newValue: newValue
     })
-    await console.log (this.state.changedColumn)
+    let changeData = JSON.stringify ({id: this.state.changedRow.id, changedrow: this.state.changedColumn.dataField, newvalue: this.state.newValue});
+    console.log(changeData)
+
+    fetch('http://localhost:3001/orders/id', {
+      method: 'PUT',
+      body: changeData,
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
   }
+
 
   async getAllOrders() {
     const response = await fetch ('http://localhost:3001/orders', {
@@ -59,7 +71,7 @@ class OrderList extends React.Component {
           pagination={paginationFactory()}
           cellEdit={cellEditFactory({
             mode: 'dbclick',
-            afterSaveCell: (oldValue, newValue, row, column) => {this.changeOneOrder(row, column)}
+            afterSaveCell: (oldValue, newValue, row, column) => {this.changeOneOrder(newValue, row, column)}
           })}
           />
         </div>

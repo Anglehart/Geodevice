@@ -38,17 +38,13 @@ router.get("/id", function (request, response) { //Возвращает одно
   .then(function (data) {
     return response.json(data);
   })
-})
+})*/
 
-router.put("/id", function (request, response) { //Изменить пользователя по ID
+router.put("/id", function (request, response) { //Изменить пользователя
   if(!request.body) return response.sendStatus(400);
-  db.one('UPDATE Users SET name = $1, age = $2 WHERE id = $3 RETURNING id, name, age; ', [request.body.userName, request.body.userAge, request.body.userId])
-    .then(function (data) {
-      console.log(data);
-      return response.json(data);
-    })
+  db.one('UPDATE orders SET $1 = $2 WHERE id = $3;', [request.body.changedrow, request.body.newvalue, request.body.id])
     .catch(function (error) {
       return response.json(error);
   });
-});*/
+});
 module.exports = router;
