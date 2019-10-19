@@ -42,7 +42,7 @@ router.get("/id", function (request, response) { //Возвращает одно
 
 router.put("/id", function (request, response) { //Изменить пользователя
   if(!request.body) return response.sendStatus(400);
-  db.one('UPDATE orders SET $1 = $2 WHERE id = $3;', [request.body.changedrow, request.body.newvalue, request.body.id])
+  db.one(`UPDATE orders SET ${request.body.changedrow} = '${request.body.newvalue}' WHERE id = ${request.body.id}`)
     .catch(function (error) {
       return response.json(error);
   });
