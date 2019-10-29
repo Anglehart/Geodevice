@@ -61,12 +61,20 @@ class OrderList extends React.Component {
         {dataField: 'mastername', text: 'Мастер', sort: true}
       ];
       const defaultSorted = [{dataField: 'ourid', order: 'desc'}];
+      const selectRow = {
+        mode: 'radio',
+        clickToSelect: true,
+        onSelect: (row, isSelect, rowIndex, e) => {
+          console.log(row.id);
+        }
+      };
       return (
         <div>
           <BootstrapTable
           keyField='id'
           data={this.state.data}
           columns={columns}
+          selectRow={selectRow}
           defaultSorted={defaultSorted}
           pagination={paginationFactory()}
           cellEdit={cellEditFactory({

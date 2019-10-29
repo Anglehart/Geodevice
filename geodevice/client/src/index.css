@@ -23,9 +23,6 @@
     text-align: center;
 }
 input {
-  font-size: 1rem;
-  width: 250px;
-  padding: 7px;
 }
 .react-bootstrap-table-pagination {
   margin: 0;
