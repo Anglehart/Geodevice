@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import OrderPage from './OrderPage';
 
 
 //зарендерить app.js
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<OrderPage />, document.getElementById('root'));

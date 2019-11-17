@@ -11,7 +11,7 @@ class OrderForm extends React.Component {
       deviceSn: '',
       masterName: ''
     };
-    //Эти строки не понятны
+    
     this.handleOurIdChange = this.handleOurIdChange.bind(this)
     this.handleContactNameChange = this.handleContactNameChange.bind(this)
     this.handleContactPhoneChange = this.handleContactPhoneChange.bind(this)

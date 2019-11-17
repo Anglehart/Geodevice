@@ -1,4 +1,3 @@
-//Получаем исходные данные из базы
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -8,14 +7,12 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 class OrderList extends React.Component {
   constructor(props) {
     super(props);
-    this.getAllOrders = this.getAllOrders.bind(this)
     this.state = {
       data: [],
       changedRow: "",
       changedColumn: "",
       newValue: ""
     }
-    this.getAllOrders();
   }
 
   async changeOneOrder(newValue, row, column) {
@@ -36,20 +33,6 @@ class OrderList extends React.Component {
     })
   }
 
-
-  async getAllOrders() {
-    const response = await fetch ('http://localhost:3001/orders', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    this.setState ({
-      data: data
-    })
-  }
-
     render() {
       const columns = [
         {dataField: 'ourid', text: 'Наш ID', sort: true},
@@ -63,11 +46,12 @@ class OrderList extends React.Component {
       const defaultSorted = [{dataField: 'ourid', order: 'desc'}];
       const selectRow = {
         mode: 'radio',
-        clickToSelect: true,
+        clickToSelect: false,
         onSelect: (row, isSelect, rowIndex, e) => {
           console.log(row.id);
         }
       };
+
       return (
         <div>
           <BootstrapTable
@@ -79,7 +63,7 @@ class OrderList extends React.Component {
           pagination={paginationFactory()}
           cellEdit={cellEditFactory({
             mode: 'dbclick',
-            afterSaveCell: (oldValue, newValue, row, column) => {this.changeOneOrder(newValue, row, column)}
+            afterSaveCell: (oldValue, newValue, row, column) => {this.props.onEdit(newValue, row, column)}
           })}
           />
         </div>
