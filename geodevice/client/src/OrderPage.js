@@ -7,12 +7,14 @@ function OrderPage() {
   const [orders, setOrders] = React.useState([]);
   const [selectedIndex, setSelectedIndex] = React.useState();
 
+
   React.useEffect(() => {
     OrdersService.getList() //промис
     .then((data) => {
         setOrders(data)
-    })
-  }, []);
+        console.log(data)
+    }, []);
+  })
 }
   /*const onOrderSelect = (index) => {
     const selectedOrder = orders[index]; //исправить
@@ -47,6 +49,7 @@ function OrderPage() {
         </div>
      )
    }
-}
+ }
+
 
 export default Root;
