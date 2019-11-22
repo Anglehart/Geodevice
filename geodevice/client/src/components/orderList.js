@@ -34,6 +34,7 @@ class OrderList extends React.Component {
   }
 
     render() {
+
       const columns = [
         {dataField: 'ourid', text: 'Наш ID', sort: true},
         {dataField: 'contactname', text: 'Имя заказчика', sort: true},
@@ -48,15 +49,14 @@ class OrderList extends React.Component {
         mode: 'radio',
         clickToSelect: false,
         onSelect: (row, isSelect, rowIndex, e) => {
-          console.log(row.id);
         }
-      };
+      }
 
       return (
         <div>
           <BootstrapTable
           keyField='id'
-          data={this.state.data}
+          data={this.props.list}
           columns={columns}
           selectRow={selectRow}
           defaultSorted={defaultSorted}
@@ -69,7 +69,6 @@ class OrderList extends React.Component {
         </div>
       );
     }
-
 }
 
 export default OrderList;
