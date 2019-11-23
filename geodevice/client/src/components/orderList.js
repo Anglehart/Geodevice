@@ -34,7 +34,7 @@ class OrderList extends React.Component {
   }
 
     render() {
-
+      console.log ("props", this.props.list)
       const columns = [
         {dataField: 'ourid', text: 'Наш ID', sort: true},
         {dataField: 'contactname', text: 'Имя заказчика', sort: true},
