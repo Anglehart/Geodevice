@@ -22,9 +22,8 @@ router.get("/", function (request, response) { //Показать всех по�
   })
 })
 
-/*
 router.delete("/id", function (request, response) { //Удалить пользователя по ID
-  db.any('DELETE FROM users WHERE id = $1 RETURNING id;', [request.query.userId])
+  db.any('DELETE FROM users WHERE id = $1 RETURNING id;', [request.query.id])
     .then(function (data) {
       return response.json(data);
     })
@@ -32,7 +31,7 @@ router.delete("/id", function (request, response) { //Удалить польз�
       console.log("ERROR:", error);
   });
 });
-
+/*
 router.get("/id", function (request, response) { //Возвращает одного пользователя
   db.one('SELECT name, age, id FROM users WHERE id = $1;', [request.query.userId])
   .then(function (data) {

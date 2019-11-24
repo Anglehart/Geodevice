@@ -7,7 +7,6 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 class OrderList extends React.Component {
 
     render() {
-      console.log ("props", this.props.list)
       const columns = [
         {dataField: 'ourid', text: 'Наш ID', sort: true},
         {dataField: 'contactname', text: 'Имя заказчика', sort: true},
@@ -21,8 +20,7 @@ class OrderList extends React.Component {
       const selectRow = {
         mode: 'radio',
         clickToSelect: false,
-        onSelect: (row, isSelect, rowIndex, e) => {
-        }
+        onSelect: (row, isSelect, rowIndex, e) => {this.props.onSelect(rowIndex)}
       }
 
       return (
