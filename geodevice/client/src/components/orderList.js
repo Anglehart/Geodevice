@@ -5,33 +5,6 @@ import cellEditFactory from 'react-bootstrap-table2-editor';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 
 class OrderList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      changedRow: "",
-      changedColumn: "",
-      newValue: ""
-    }
-  }
-
-  async changeOneOrder(newValue, row, column) {
-    await this.setState ({
-      changedRow: row,
-      changedColumn: column,
-      newValue: newValue
-    })
-    let changeData = JSON.stringify ({id: this.state.changedRow.id, changedrow: this.state.changedColumn.dataField, newvalue: this.state.newValue});
-    console.log(changeData)
-
-    fetch('http://localhost:3001/orders/id', {
-      method: 'PUT',
-      body: changeData,
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-  }
 
     render() {
       console.log ("props", this.props.list)

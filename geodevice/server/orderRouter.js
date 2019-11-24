@@ -40,7 +40,7 @@ router.get("/id", function (request, response) { //Возвращает одно
   })
 })*/
 
-router.put("/id", function (request, response) { //Изменить пользователя
+router.put("/id", function (request, response) { //Изменить заказ
   if(!request.body) return response.sendStatus(400);
   db.one(`UPDATE orders SET ${request.body.changedrow} = '${request.body.newvalue}' WHERE id = ${request.body.id}`)
     .catch(function (error) {

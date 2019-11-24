@@ -7,6 +7,8 @@ import OrdersService from './modules/orders/orders.service.js';
 function OrderPage() { //это компонент
    const [orders, setOrders] = React.useState([]);
 
+
+
    React.useEffect(() => {
      OrdersService.getList()
      .then((data) => {
@@ -15,9 +17,22 @@ function OrderPage() { //это компонент
      });
    }, [])
 
+   function changeOneOrder(newValue, changedRow, changedColumn) {
+     let changeData = JSON.stringify ({id: changedRow.id, changedrow: changedColumn.dataField, newvalue: newValue});
+     console.log(changeData)
+
+     fetch('http://localhost:3001/orders/id', {
+       method: 'PUT',
+       body: changeData,
+       headers:{
+         'Content-Type': 'application/json'
+       }
+     })
+   }
+
   return (
     <div>
-      <OrderList list={orders} />
+      <OrderList list={orders} onEdit={changeOneOrder} />
     </div>
   )
 }
