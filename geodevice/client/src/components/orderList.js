@@ -20,7 +20,10 @@ class OrderList extends React.Component {
       const selectRow = {
         mode: 'radio',
         clickToSelect: false,
-        onSelect: (row, isSelect, rowIndex, e) => {this.props.onSelect(rowIndex)}
+        onSelect: (row) => {
+          console.log(row.id) //работает
+          this.props.onSelect(row.id) //не работает this.props.onSelect is not a function
+        }
       }
 
       return (
