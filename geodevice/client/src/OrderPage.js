@@ -32,8 +32,8 @@ function OrderPage() { //это компонент
 
   return (
     <div>
-      <OrderForm onSelect={selectOneOrder}/>
-      <OrderList list={orders} onEdit={changeOneOrder} />
+      <OrderForm />
+      <OrderList list={orders} onEdit={changeOneOrder} onSelect={selectOneOrder} />
     </div>
   )
 }
