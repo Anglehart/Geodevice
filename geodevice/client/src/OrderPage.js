@@ -31,7 +31,7 @@ function OrderPage() { //это компонент
   }
 
   function deleteOneOrder(){
-    if (window.confirm("Удалить заказ № " + selectedOrder + "?")) {
+    if (window.confirm("Удалить заказ?")) {
       let url = 'http://localhost:3001/orders/id?orderId=' + selectedOrder;
       fetch(url, {
         method: 'DELETE',
@@ -47,7 +47,7 @@ function OrderPage() { //это компонент
         }
       })
       .then(function(receivedOrders) {
-        alert('Заказ удален' )
+        alert('Удален заказ №'+ receivedOrders[0].ourid )
       })
       .catch(function(error){
         alert ('Нет такого заказа');
