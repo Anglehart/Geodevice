@@ -52,6 +52,11 @@ function OrderPage() { //это компонент
       .catch(function(error){
         alert ('Нет такого заказа');
       })
+
+      OrdersService.getList()
+      .then((data) => {
+       setOrders(data)
+      });
   }
   }
 
