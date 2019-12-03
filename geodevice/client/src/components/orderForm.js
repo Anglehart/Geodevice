@@ -11,7 +11,7 @@ class OrderForm extends React.Component {
       deviceSn: '',
       masterName: ''
     };
-    
+
     this.handleOurIdChange = this.handleOurIdChange.bind(this)
     this.handleContactNameChange = this.handleContactNameChange.bind(this)
     this.handleContactPhoneChange = this.handleContactPhoneChange.bind(this)
@@ -72,7 +72,7 @@ class OrderForm extends React.Component {
           </div>
           <div className="addOrderButtons">
             <button id="newOrder" onClick={this.handleCreate}>Добавить заказ</button><br />
-            <button id="changeOrder">Удалить заказ</button><br />
+            <button id="deleteOrder" onClick={this.props.onDelete}>Удалить заказ</button><br />
           </div>
         </div>
     )

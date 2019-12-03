@@ -23,7 +23,8 @@ router.get("/", function (request, response) { //Показать всех по�
 })
 
 router.delete("/id", function (request, response) { //Удалить пользователя по ID
-  db.any('DELETE FROM users WHERE id = $1 RETURNING id;', [request.query.id])
+  console.log(request.query.orderId)
+  db.any('DELETE FROM orders WHERE id = $1 RETURNING id;', [request.query.orderId])
     .then(function (data) {
       return response.json(data);
     })

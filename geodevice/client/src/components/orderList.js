@@ -21,8 +21,8 @@ class OrderList extends React.Component {
         mode: 'radio',
         clickToSelect: false,
         onSelect: (row) => {
-          console.log(row.id) //работает
-          this.props.onSelect(row.id) //не работает this.props.onSelect is not a function
+          this.props.onSelect(row.id)
+          console.log("Это выбираем: ", row.id)
         }
       }
 

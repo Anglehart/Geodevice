@@ -6,7 +6,7 @@ import OrdersService from './modules/orders/orders.service.js';
 
 function OrderPage() { //это компонент
   const [orders, setOrders] = React.useState([]);
-  //const [selectedIndex, setSelectedIndex] = React.useState();
+  const [selectedOrder, setSelectedOrder] = React.useState();
 
   React.useEffect(() => {
     OrdersService.getList()
@@ -17,22 +17,49 @@ function OrderPage() { //это компонент
 
   function changeOneOrder(newValue, changedRow, changedColumn) {
     let changeData = JSON.stringify ({id: changedRow.id, changedrow: changedColumn.dataField, newvalue: newValue});
-   fetch('http://localhost:3001/orders/id', {
-     method: 'PUT',
-     body: changeData,
-     headers:{
-       'Content-Type': 'application/json'
-     }
-   })
- }
+    fetch('http://localhost:3001/orders/id', {
+      method: 'PUT',
+      body: changeData,
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+  }
 
- function selectOneOrder(rowIndex){
-   console.log(rowIndex)
- }
+  function selectOneOrder(rowIndex){
+    setSelectedOrder(rowIndex)
+  }
+
+  function deleteOneOrder(){
+    if (window.confirm("Удалить заказ № " + selectedOrder + "?")) {
+      let url = 'http://localhost:3001/orders/id?orderId=' + selectedOrder;
+      fetch(url, {
+        method: 'DELETE',
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(response) {
+        if (response.status !== 200) {
+          throw new Error('Статус не 200');
+        } else {
+          return response.json();
+        }
+      })
+      .then(function(receivedOrders) {
+        alert('Заказ удален' )
+      })
+      .catch(function(error){
+        alert ('Нет такого заказа');
+      })
+  }
+  }
+
+
 
   return (
     <div>
-      <OrderForm />
+      <OrderForm onDelete={deleteOneOrder}/>
       <OrderList list={orders} onEdit={changeOneOrder} onSelect={selectOneOrder} />
     </div>
   )
