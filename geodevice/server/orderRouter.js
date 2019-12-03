@@ -23,13 +23,12 @@ router.get("/", function (request, response) { //Показать всех по�
 })
 
 router.delete("/id", function (request, response) { //Удалить пользователя по ID
-  console.log(request.query.orderId)
-  db.any('DELETE FROM orders WHERE id = $1 RETURNING id;', [request.query.orderId])
-    .then(function (data) {
-      return response.json(data);
-    })
-    .catch(function (error) {
-      console.log("ERROR:", error);
+  db.any('DELETE FROM orders WHERE id = $1 RETURNING ourid;', [request.query.orderId])
+  .then(function (data) {
+    return response.json(data);
+  })
+  .catch(function (error) {
+    console.log("ERROR:", error);
   });
 });
 /*
