@@ -19,7 +19,6 @@ class OrderForm extends React.Component {
     this.handleDeviceNameChange = this.handleDeviceNameChange.bind(this)
     this.handleDeviceSnChange = this.handleDeviceSnChange.bind(this)
     this.handleMasterNameChange = this.handleMasterNameChange.bind(this)
-    this.handleCreate = this.handleCreate.bind(this)
   }
 
   handleOurIdChange(e) {
@@ -71,33 +70,11 @@ class OrderForm extends React.Component {
           </div>
           </div>
           <div className="addOrderButtons">
-            <button id="newOrder" onClick={this.handleCreate}>Добавить заказ</button><br />
+            <button id="newOrder" onClick={this.props.onCreate(this.state)}>Добавить заказ</button><br />
             <button id="deleteOrder" onClick={this.props.onDelete}>Удалить заказ</button><br />
           </div>
         </div>
     )
-  }
-
-  handleCreate() {
-    let data = JSON.stringify(this.state);
-    fetch('http://localhost:3001/orders', {
-      method: 'POST',
-      body: data,
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(response) {
-      if (response.status !== 200) {
-        throw new Error(response.status);
-      } else {
-        return response.json();
-      }
-    })
-    .catch(function(error){
-      alert ('Ошибка сервера ' + error);
-    })
   }
 }
 

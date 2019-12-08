@@ -4,7 +4,7 @@ import OrderList from './components/orderList.js';
 import OrdersService from './modules/orders/orders.service.js';
 
 
-function OrderPage() { //это компонент
+function OrderPage() {
   const [orders, setOrders] = React.useState([]);
   const [selectedOrder, setSelectedOrder] = React.useState();
 
@@ -14,6 +14,29 @@ function OrderPage() { //это компонент
      setOrders(data)
    });
   }, [])
+
+  function createOneOrder(newOrder){
+    let data = JSON.stringify(newOrder);
+    console.log(data)
+    fetch('http://localhost:3001/orders', {
+      method: 'POST',
+      body: data,
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      if (response.status !== 200) {
+        throw new Error(response.status);
+      } else {
+        return response.json();
+      }
+    })
+    .catch(function(error){
+      alert ('Ошибка сервера ' + error);
+    })
+  }
 
   function changeOneOrder(newValue, changedRow, changedColumn) {
     let changeData = JSON.stringify ({id: changedRow.id, changedrow: changedColumn.dataField, newvalue: newValue});
@@ -64,7 +87,7 @@ function OrderPage() { //это компонент
 
   return (
     <div>
-      <OrderForm onDelete={deleteOneOrder}/>
+      <OrderForm onDelete={deleteOneOrder} onCreate={createOneOrder}/>
       <OrderList list={orders} onEdit={changeOneOrder} onSelect={selectOneOrder} />
     </div>
   )
