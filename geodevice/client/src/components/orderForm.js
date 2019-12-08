@@ -23,6 +23,7 @@ class OrderForm extends React.Component {
 
   handleOurIdChange(e) {
     this.setState({ourId: e.target.value});
+    console.log(this.state.ourId)
   }
   handleContactNameChange(e) {
     this.setState({contactName: e.target.value});
@@ -70,7 +71,7 @@ class OrderForm extends React.Component {
           </div>
           </div>
           <div className="addOrderButtons">
-            <button id="newOrder" onClick={this.props.onCreate(this.state)}>Добавить заказ</button><br />
+            <button id="newOrder" onClick={() => {this.props.onCreate(this.state)}}>Добавить заказ</button><br />
             <button id="deleteOrder" onClick={this.props.onDelete}>Удалить заказ</button><br />
           </div>
         </div>

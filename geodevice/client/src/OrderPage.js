@@ -15,7 +15,7 @@ function OrderPage() {
    });
   }, [])
 
-  function createOneOrder(newOrder){
+  function createOneOrder(newOrder) {
     let data = JSON.stringify(newOrder);
     console.log(data)
     fetch('http://localhost:3001/orders', {
@@ -30,12 +30,23 @@ function OrderPage() {
       if (response.status !== 200) {
         throw new Error(response.status);
       } else {
-        return response.json();
+        return response.json()
       }
     })
     .catch(function(error){
       alert ('Ошибка сервера ' + error);
     })
+    .then(function(newOrder) {
+      alert('Добавлен заказ №'+ newOrder.ourid )
+    })
+    .catch(function(error){
+      alert ('Нет такого заказа');
+    })
+    
+    OrdersService.getList()
+    .then((data) => {
+     setOrders(data)
+    });
   }
 
   function changeOneOrder(newValue, changedRow, changedColumn) {
@@ -80,9 +91,8 @@ function OrderPage() {
       .then((data) => {
        setOrders(data)
       });
+    }
   }
-  }
-
 
 
   return (
